@@ -61,23 +61,35 @@ final class ViewerModelTests: XCTestCase {
         try? FileManager.default.removeItem(at: dir)
     }
 
+    private var defaults: UserDefaults!
+
+    override func setUp() {
+        super.setUp()
+        defaults = UserDefaults(suiteName: "EasyMacImgViewerTests-\(UUID().uuidString)")
+    }
+
+    private func makeModel(url: URL) -> ViewerModel {
+        ViewerModel(url: url, defaults: defaults)
+    }
+
     func testScansFolderAndFindsCurrentFileIndex() async throws {
         let dir = try makeTempDir(withNames: ["a.png", "b.png", "c.png"])
         defer { removeTempDir(dir) }
 
-        let model = ViewerModel(url: dir.appendingPathComponent("c.png"))
+        let model = makeModel(url: dir.appendingPathComponent("c.png"))
         await model.load()
 
-        XCTAssertEqual(model.files.map { $0.lastPathComponent }, ["a.png", "b.png", "c.png"])
+        XCTAssertEqual(model.files.map { $0.displayName }, ["a.png", "b.png", "c.png"])
         XCTAssertEqual(model.index, 2)
         XCTAssertEqual(model.currentURL.lastPathComponent, "c.png")
+        XCTAssertEqual(model.fileName, "c.png")
     }
 
     func testNavigationBoundaries() async throws {
         let dir = try makeTempDir(withNames: ["a.png", "b.png", "c.png"])
         defer { removeTempDir(dir) }
 
-        let model = ViewerModel(url: dir.appendingPathComponent("b.png"))
+        let model = makeModel(url: dir.appendingPathComponent("b.png"))
         await model.load()
         XCTAssertEqual(model.index, 1)
         XCTAssertTrue(model.canGoPrevious)
@@ -104,7 +116,7 @@ final class ViewerModelTests: XCTestCase {
         let dir = try makeTempDir(withNames: ["IMG_0001.HEIC", "IMG_0001.MOV", "IMG_0002.HEIC"])
         defer { removeTempDir(dir) }
 
-        let model = ViewerModel(url: dir.appendingPathComponent("IMG_0001.HEIC"))
+        let model = makeModel(url: dir.appendingPathComponent("IMG_0001.HEIC"))
         await model.load()
 
         XCTAssertNotNil(model.livePhoto)
@@ -118,7 +130,7 @@ final class ViewerModelTests: XCTestCase {
         let dir = try makeTempDir(withNames: ["IMG_5108.JPG", "IMG_5108.MOV", "IMG_5109.JPG"], writeRealImages: true)
         defer { removeTempDir(dir) }
 
-        let model = ViewerModel(url: dir.appendingPathComponent("IMG_5108.JPG"))
+        let model = makeModel(url: dir.appendingPathComponent("IMG_5108.JPG"))
         await model.load()
 
         XCTAssertFalse(model.loadFailed)
@@ -134,7 +146,7 @@ final class ViewerModelTests: XCTestCase {
         let dir = try makeTempDir(withNames: ["IMG_1234.HEIC", "IMG_1234_HEVC.MOV"])
         defer { removeTempDir(dir) }
 
-        let model = ViewerModel(url: dir.appendingPathComponent("IMG_1234.HEIC"))
+        let model = makeModel(url: dir.appendingPathComponent("IMG_1234.HEIC"))
         await model.load()
 
         XCTAssertNotNil(model.livePhoto)
@@ -145,7 +157,7 @@ final class ViewerModelTests: XCTestCase {
         let dir = try makeTempDir(withNames: ["a.png"], writeRealImages: true)
         defer { removeTempDir(dir) }
 
-        let model = ViewerModel(url: dir.appendingPathComponent("a.png"))
+        let model = makeModel(url: dir.appendingPathComponent("a.png"))
         await model.load()
 
         XCTAssertFalse(model.isOrphanLivePhoto)
@@ -156,7 +168,7 @@ final class ViewerModelTests: XCTestCase {
         let dir = try makeTempDir(withNames: ["a.png"], writeRealImages: true)
         defer { removeTempDir(dir) }
 
-        let model = ViewerModel(url: dir.appendingPathComponent("a.png"))
+        let model = makeModel(url: dir.appendingPathComponent("a.png"))
         await model.load()
         XCTAssertFalse(model.loadFailed)
         XCTAssertEqual(model.imageSize, CGSize(width: 40, height: 30))
@@ -190,5 +202,94 @@ final class ViewerModelTests: XCTestCase {
 
         model.toggleFitActual()
         XCTAssertEqual(model.zoomMode, .fit)
+    }
+
+    // MARK: - 照片文件夹模式
+
+    func testOpensFileInsidePhotoFolderLocatesFolderItem() async throws {
+        let dir = try makeTempDir(withNames: [])
+        defer { removeTempDir(dir) }
+        let photoDir = dir.appendingPathComponent("IMG_5111")
+        try FileManager.default.createDirectory(at: photoDir, withIntermediateDirectories: true)
+        FileManager.default.createFile(atPath: photoDir.appendingPathComponent("IMG_5111.HEIC").path, contents: Data([0x00]))
+        FileManager.default.createFile(atPath: photoDir.appendingPathComponent("IMG_5111.MOV").path, contents: Data([0x00]))
+
+        let model = makeModel(url: photoDir.appendingPathComponent("IMG_5111.HEIC"))
+        model.folderModeEnabled = true
+        await model.load()
+
+        XCTAssertEqual(model.files.count, 1)
+        guard case .folder(let name, _) = model.files[0] else {
+            return XCTFail("expected folder item")
+        }
+        XCTAssertEqual(name, "IMG_5111")
+        XCTAssertEqual(model.index, 0)
+        XCTAssertEqual(model.currentURL.lastPathComponent, "IMG_5111.HEIC")
+        XCTAssertEqual(model.fileName, "IMG_5111")
+        XCTAssertNotNil(model.livePhoto)
+    }
+
+    func testOpensEditedFileInsideFolderUsesEditedPrimary() async throws {
+        let dir = try makeTempDir(withNames: [])
+        defer { removeTempDir(dir) }
+        let photoDir = dir.appendingPathComponent("IMG_5102")
+        try FileManager.default.createDirectory(at: photoDir, withIntermediateDirectories: true)
+        FileManager.default.createFile(atPath: photoDir.appendingPathComponent("IMG_5102.JPG").path, contents: Data([0x00]))
+        FileManager.default.createFile(atPath: photoDir.appendingPathComponent("IMG_E5102.jpg").path, contents: Data([0x00]))
+        FileManager.default.createFile(atPath: photoDir.appendingPathComponent("IMG_5102.AAE").path, contents: Data([0x00]))
+
+        let model = makeModel(url: photoDir.appendingPathComponent("IMG_5102.JPG"))
+        model.folderModeEnabled = true
+        await model.load()
+
+        XCTAssertEqual(model.files.count, 1)
+        XCTAssertEqual(model.currentURL.lastPathComponent, "IMG_E5102.jpg")
+    }
+
+    func testOriginalPreferencePicksOriginalPrimary() async throws {
+        let dir = try makeTempDir(withNames: [])
+        defer { removeTempDir(dir) }
+        let photoDir = dir.appendingPathComponent("IMG_5102")
+        try FileManager.default.createDirectory(at: photoDir, withIntermediateDirectories: true)
+        FileManager.default.createFile(atPath: photoDir.appendingPathComponent("IMG_5102.JPG").path, contents: Data([0x00]))
+        FileManager.default.createFile(atPath: photoDir.appendingPathComponent("IMG_E5102.jpg").path, contents: Data([0x00]))
+
+        let model = makeModel(url: photoDir.appendingPathComponent("IMG_E5102.jpg"))
+        model.folderModeEnabled = true
+        model.primaryPreference = .original
+        await model.load()
+
+        XCTAssertEqual(model.currentURL.lastPathComponent, "IMG_5102.JPG")
+    }
+
+    func testPreferenceSwitchReloadsPreservingSelection() async throws {
+        let dir = try makeTempDir(withNames: [])
+        defer { removeTempDir(dir) }
+        let photoDir = dir.appendingPathComponent("IMG_5102")
+        try FileManager.default.createDirectory(at: photoDir, withIntermediateDirectories: true)
+        FileManager.default.createFile(atPath: photoDir.appendingPathComponent("IMG_5102.JPG").path, contents: Data([0x00]))
+        FileManager.default.createFile(atPath: photoDir.appendingPathComponent("IMG_E5102.jpg").path, contents: Data([0x00]))
+
+        let model = makeModel(url: photoDir.appendingPathComponent("IMG_5102.JPG"))
+        model.folderModeEnabled = true
+        await model.load()
+        XCTAssertEqual(model.currentURL.lastPathComponent, "IMG_E5102.jpg")
+
+        model.primaryPreference = .original
+        await waitForReload(of: model)
+        XCTAssertEqual(model.currentURL.lastPathComponent, "IMG_5102.JPG")
+        XCTAssertEqual(model.fileName, "IMG_5102")
+
+        model.primaryPreference = .edited
+        await waitForReload(of: model)
+        XCTAssertEqual(model.currentURL.lastPathComponent, "IMG_E5102.jpg")
+    }
+
+    private func waitForReload(of model: ViewerModel) async {
+        var attempts = 0
+        while model.isLoading, attempts < 200 {
+            try? await Task.sleep(for: .milliseconds(10))
+            attempts += 1
+        }
     }
 }

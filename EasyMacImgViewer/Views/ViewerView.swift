@@ -2,8 +2,24 @@ import SwiftUI
 
 struct ViewerView: View {
     let model: ViewerModel
+    @State private var showSidebar = false
 
     var body: some View {
+        HStack(spacing: 0) {
+            if showSidebar {
+                SidebarView(model: model)
+                    .transition(.move(edge: .leading))
+            }
+            canvas
+        }
+        .animation(.easeInOut(duration: 0.2), value: showSidebar)
+        .focusedSceneValue(\.viewerModel, model)
+        .toolbar { ViewerToolbar(model: model, showSidebar: $showSidebar) }
+        .navigationTitle(model.fileName)
+        .task { await model.load() }
+    }
+
+    private var canvas: some View {
         ZStack {
             Color.black.ignoresSafeArea()
             ImageCanvasView(model: model)
@@ -55,10 +71,6 @@ struct ViewerView: View {
             }
         }
         .animation(.easeInOut(duration: 0.15), value: model.isMouseInside)
-        .focusedSceneValue(\.viewerModel, model)
-        .toolbar { ViewerToolbar(model: model) }
-        .navigationTitle(model.fileName)
-        .task { await model.load() }
     }
 }
 

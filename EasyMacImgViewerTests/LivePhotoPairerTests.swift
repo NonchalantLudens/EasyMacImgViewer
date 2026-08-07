@@ -92,6 +92,24 @@ final class LivePhotoPairerTests: XCTestCase {
         XCTAssertNil(LivePhotoPairer.pairedVideoURL(for: url))
     }
 
+    func testEditedVersionPairsWithOriginalVideo() throws {
+        let dir = try makeTempDir()
+        defer { removeTempDir(dir) }
+        makeFiles(dir, ["IMG_E5102.jpg", "IMG_5102.MOV"])
+
+        let paired = LivePhotoPairer.pairedVideoURL(for: dir.appendingPathComponent("IMG_E5102.jpg"))
+        XCTAssertEqual(paired?.lastPathComponent, "IMG_5102.MOV")
+    }
+
+    func testEditedVersionHevcSuffixPairsWithOriginalVideo() throws {
+        let dir = try makeTempDir()
+        defer { removeTempDir(dir) }
+        makeFiles(dir, ["IMG_E5102.HEIC", "IMG_5102_HEVC.MOV"])
+
+        let paired = LivePhotoPairer.pairedVideoURL(for: dir.appendingPathComponent("IMG_E5102.HEIC"))
+        XCTAssertEqual(paired?.lastPathComponent, "IMG_5102_HEVC.MOV")
+    }
+
     func testMatchPreferenceOrder() {
         let videos = [
             URL(fileURLWithPath: "/tmp/IMG_1234_HEVC.MOV"),

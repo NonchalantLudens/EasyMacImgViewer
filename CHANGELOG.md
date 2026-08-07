@@ -2,6 +2,13 @@
 
 本项目所有重要变更记录于此，格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，版本遵循[语义化版本](https://semver.org/lang/zh-CN/)。版本条目含中英双语标题与摘要。
 
+## [Unreleased]
+
+### 新增 / Added
+
+- 侧边栏：可收回的图像列表（⌘⌥S），缩略图/列表双模式可切换，点击切换图像 / Sidebar: collapsible image list (⌘⌥S) with thumbnail / list modes, click to switch
+- 照片文件夹识别（iPhone「所有数据」模式，View 菜单开关）：将每照片文件夹视为一张图像，支持裁切副本（原图 + `IMG_E` 编辑版 + AAE）与编辑版优先开关 / Photo folder recognition (iPhone "Full Data" mode, View menu toggle): treats each photo folder as one image, supports edited copies (original + `IMG_E` edited version + AAE) with an edited-version preference toggle
+
 ## [1.0.0] - 2026-08-08
 
 ### Summary / 摘要

@@ -39,6 +39,17 @@ struct ViewerCommands: Commands {
                 .keyboardShortcut("+")
             Button("缩小") { viewerModel?.zoomOut() }
                 .keyboardShortcut("-")
+            Divider()
+            if let model = viewerModel {
+                Toggle("将照片文件夹识别为图像（iPhone 所有数据）", isOn: Binding(
+                    get: { model.folderModeEnabled },
+                    set: { model.folderModeEnabled = $0 }
+                ))
+                Toggle("照片文件夹优先显示编辑版本", isOn: Binding(
+                    get: { model.primaryPreference == .edited },
+                    set: { model.primaryPreference = $0 ? .edited : .original }
+                ))
+            }
         }
     }
 }

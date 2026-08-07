@@ -24,10 +24,12 @@ A native SwiftUI image viewer with zero third-party dependencies: folder-aware n
 
 ## Features
 
-- **Folder-aware navigation** — auto-scans the folder of the opened file, sorted in Finder natural order; switch via mouse (click left/right edges) or keyboard (←/→/Space)
+- **Folder-aware navigation** — auto-scans the folder of the opened file, sorted in Finder natural order; switch via mouse (click left/right edges), keyboard (←/→/Space), or the sidebar
+- **Sidebar** — collapsible image list (⌘⌥S) with thumbnail / list modes, click to switch
 - **Multi-window** — opening another image always opens a new independent window (Finder double-click, ⌘O multi-select)
 - **Zoom** — toolbar buttons with smooth animation, trackpad pinch, ⌘+scroll, double-click toggles 100%/fit, ⌘0/⌘1/⌘+/⌘−
 - **Live Photo** — loop playback with sound for paired .mov/.mp4 videos; supports same-name and `_HEVC` naming patterns plus ContentIdentifier metadata fallback; hints when the video part was not transferred
+- **Photo folders (iPhone Full Data)** — optional mode (View menu) treating each photo folder from iPhone "Full Data" transfer as one image, with edited-version preference toggle
 - **Animated images** — GIF / animated WebP frame playback
 - **Formats** — JPEG / PNG / GIF / TIFF / BMP / WebP / HEIC / HEIF / JPEG XL / SVG / ICNS / JPEG-2000 / common camera RAW (CR2 / NEF / ARW / DNG / RAF / ORF / RW2 etc.), with EXIF orientation correction
 - **Drag to pan** — when zoomed in, mouse drag pans the image (grab cursor, clamped edges)
@@ -61,12 +63,14 @@ First launch on a not-notarized build: right-click the app → Open → confirm.
 | Operation | How |
 | --- | --- |
 | Open images | ⌘O, or double-click files in Finder, or drag onto the app |
+| Show / hide sidebar | ⌘⌥S or the sidebar toolbar button |
 | Previous / next image | ← / → / Space, or click left/right 12% edge of the window |
 | Zoom in / out | Toolbar buttons, trackpad pinch, ⌘+scroll, ⌘+ / ⌘− |
 | Fit window / actual size | Double-click, ⌘0 / ⌘1 |
 | Pan when zoomed | Drag with mouse (grab cursor) |
 | Play Live Photo | Click the "Live" badge or the toolbar button |
 | Play / pause animated GIF | Toolbar play button |
+| Photo folder mode | View menu → "Treat photo folders as images (iPhone Full Data)" |
 
 ## Troubleshooting
 

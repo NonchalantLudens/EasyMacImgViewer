@@ -2,9 +2,18 @@ import SwiftUI
 
 struct ViewerToolbar: ToolbarContent {
     let model: ViewerModel
+    @Binding var showSidebar: Bool
 
     var body: some ToolbarContent {
         ToolbarItemGroup(placement: .navigation) {
+            Button {
+                showSidebar.toggle()
+            } label: {
+                Label("侧边栏", systemImage: "sidebar.left")
+            }
+            .keyboardShortcut("s", modifiers: [.command, .option])
+            .help("显示/隐藏侧边栏 (⌘⌥S)")
+
             Button {
                 OpenRequest.showPanel()
             } label: {

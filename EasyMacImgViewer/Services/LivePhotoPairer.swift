@@ -48,6 +48,20 @@ enum LivePhotoPairer {
         }) {
             return hevc
         }
+        // 编辑版主图（IMG_E5102）回退匹配原始命名视频（IMG_5102.MOV）
+        if let baseStem = PhotoNaming.baseStem(of: stem) {
+            if let exact = videos.first(where: {
+                $0.deletingPathExtension().lastPathComponent.compare(baseStem, options: .caseInsensitive) == .orderedSame
+            }) {
+                return exact
+            }
+            let baseHevcStem = baseStem + "_HEVC"
+            if let hevc = videos.first(where: {
+                $0.deletingPathExtension().lastPathComponent.compare(baseHevcStem, options: .caseInsensitive) == .orderedSame
+            }) {
+                return hevc
+            }
+        }
         if let imageIdentifier {
             for video in videos {
                 if videoIdentifierOf(video) == imageIdentifier {

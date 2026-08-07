@@ -18,7 +18,7 @@ enum CanvasEdge: Equatable {
 final class ViewerModel {
     let url: URL
 
-    private(set) var files: [URL] = []
+    private(set) var files: [ViewerItem] = []
     private(set) var index = 0
     private(set) var isLoading = true
     private(set) var loadFailed = false
@@ -38,12 +38,19 @@ final class ViewerModel {
     private var loadTask: Task<Void, Never>?
     private var zoomAnimationTask: Task<Void, Never>?
 
-    nonisolated init(url: URL) {
+    nonisolated init(url: URL, defaults: UserDefaults = .standard) {
         self.url = url
+        self.defaults = defaults
+    }
+
+    nonisolated(unsafe) let defaults: UserDefaults
+
+    var currentItem: ViewerItem? {
+        files.indices.contains(index) ? files[index] : nil
     }
 
     var currentURL: URL {
-        files.indices.contains(index) ? files[index] : url
+        currentItem?.imageURL ?? url
     }
 
     var canNavigate: Bool { files.count > 1 }
@@ -51,7 +58,27 @@ final class ViewerModel {
     var canGoNext: Bool { index < files.count - 1 }
     var isAnimated: Bool { animator != nil }
     var displayImage: CGImage? { animator?.currentFrame ?? staticImage }
-    var fileName: String { currentURL.lastPathComponent }
+    var fileName: String { currentItem?.displayName ?? url.lastPathComponent }
+
+    var folderModeEnabled: Bool {
+        get { defaults.bool(forKey: "folderModeEnabled") }
+        set {
+            defaults.set(newValue, forKey: "folderModeEnabled")
+            reloadPreservingSelection()
+        }
+    }
+
+    var primaryPreference: PrimaryImagePreference {
+        get {
+            guard let raw = defaults.string(forKey: "primaryImagePreference"),
+                  let value = PrimaryImagePreference(rawValue: raw) else { return .edited }
+            return value
+        }
+        set {
+            defaults.set(newValue.rawValue, forKey: "primaryImagePreference")
+            reloadPreservingSelection()
+        }
+    }
 
     var fileSize: Int64? {
         guard let value = try? currentURL.resourceValues(forKeys: [.fileSizeKey]).fileSize else { return nil }
@@ -90,27 +117,94 @@ final class ViewerModel {
         index = 0
         resetImageState()
         let target = url
+        let folderMode = folderModeEnabled
+        let preference = primaryPreference
+        let scanDirectory = Self.scanDirectory(for: target, folderMode: folderMode)
         loadTask = Task { @MainActor [weak self] in
             guard let self else { return }
-            let scanned = await FolderScanner.scan(directory: target.deletingLastPathComponent())
+            let scanned = await FolderScanner.scan(
+                directory: scanDirectory,
+                folderMode: folderMode,
+                primaryPreference: preference
+            )
             guard !Task.isCancelled else { return }
             self.files = scanned
-            self.index = scanned.firstIndex { $0.lastPathComponent == target.lastPathComponent } ?? 0
+            self.index = Self.locate(target, in: scanned) ?? 0
             await self.decodeCurrent()
         }
         await loadTask?.value
     }
 
     func navigate(by delta: Int) {
-        let newIndex = index + delta
+        navigate(to: index + delta)
+    }
+
+    func navigate(to newIndex: Int) {
         guard files.indices.contains(newIndex) else { return }
         index = newIndex
+        reloadCurrent()
+    }
+
+    func reloadPreservingSelection() {
+        let previousName = fileName
+        let previousImageURL = currentURL
+        let folderMode = folderModeEnabled
+        let preference = primaryPreference
+        let scanDirectory = Self.scanDirectory(for: url, folderMode: folderMode)
+        loadTask?.cancel()
+        resetImageState()
+        loadTask = Task { @MainActor [weak self] in
+            guard let self else { return }
+            let scanned = await FolderScanner.scan(
+                directory: scanDirectory,
+                folderMode: folderMode,
+                primaryPreference: preference
+            )
+            guard !Task.isCancelled else { return }
+            self.files = scanned
+            self.index = scanned.firstIndex {
+                $0.displayName == previousName || $0.imageURL == previousImageURL
+            } ?? 0
+            await self.decodeCurrent()
+        }
+    }
+
+    /// 文件夹模式下，若打开的文件位于"照片文件夹"内，扫描其父目录以把文件夹作为列表项
+    private static func scanDirectory(for target: URL, folderMode: Bool) -> URL {
+        let base = target.deletingLastPathComponent()
+        guard folderMode, FolderScanner.isPhotoFolder(base) else { return base }
+        return base.deletingLastPathComponent()
+    }
+
+    private func reloadCurrent() {
         loadTask?.cancel()
         resetImageState()
         loadTask = Task { @MainActor [weak self] in
             guard let self else { return }
             await self.decodeCurrent()
         }
+    }
+
+    private static func locate(_ target: URL, in items: [ViewerItem]) -> Int? {
+        let canonical = target.resolvingSymlinksInPath()
+        if let index = items.firstIndex(where: { $0.imageURL == canonical }) {
+            return index
+        }
+        let stem = canonical.deletingPathExtension().lastPathComponent
+        if let index = items.firstIndex(where: {
+            if case .file(let url) = $0 { return url.deletingPathExtension().lastPathComponent == stem }
+            return false
+        }) {
+            return index
+        }
+        let directoryName = canonical.deletingLastPathComponent().lastPathComponent
+        if let index = items.firstIndex(where: {
+            if case .folder(let name, _) = $0 { return name == directoryName }
+            return false
+        }) {
+            return index
+        }
+        return nil
     }
 
     func zoomIn() {
