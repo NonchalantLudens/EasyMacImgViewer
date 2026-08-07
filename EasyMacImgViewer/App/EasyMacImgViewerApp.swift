@@ -21,15 +21,30 @@ extension FocusedValues {
     }
 }
 
+enum AppLanguage: String, CaseIterable {
+    case system
+    case zhHans = "zh-Hans"
+    case en = "en"
+
+    var locale: Locale {
+        switch self {
+        case .system: return Locale.current
+        case .zhHans: return Locale(identifier: "zh-Hans")
+        case .en: return Locale(identifier: "en")
+        }
+    }
+}
+
 struct ViewerCommands: Commands {
     @FocusedValue(\.viewerModel) private var viewerModel
+    @AppStorage("appLanguage") private var languageRaw = AppLanguage.system.rawValue
 
     var body: some Commands {
         CommandGroup(replacing: .newItem) {
             Button("打开…") { OpenRequest.showPanel() }
                 .keyboardShortcut("o")
         }
-        CommandMenu("显示") {
+        CommandGroup(after: .sidebar) {
             Button("适合窗口") { viewerModel?.fit() }
                 .keyboardShortcut("0")
             Button("实际大小") { viewerModel?.actual() }
@@ -50,6 +65,12 @@ struct ViewerCommands: Commands {
                     set: { model.primaryPreference = $0 ? .edited : .original }
                 ))
             }
+            Divider()
+            Picker("界面语言", selection: $languageRaw) {
+                Text("跟随系统").tag(AppLanguage.system.rawValue)
+                Text("中文").tag(AppLanguage.zhHans.rawValue)
+                Text("English").tag(AppLanguage.en.rawValue)
+            }
         }
     }
 }
@@ -57,6 +78,7 @@ struct ViewerCommands: Commands {
 @main
 struct EasyMacImgViewerApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    @AppStorage("appLanguage") private var languageRaw = AppLanguage.system.rawValue
 
     var body: some Scene {
         WindowGroup(for: ViewerTarget.self) { target in
@@ -66,6 +88,7 @@ struct EasyMacImgViewerApp: App {
         }
         .defaultSize(width: 1080, height: 720)
         .windowToolbarStyle(.unified)
+        .environment(\.locale, (AppLanguage(rawValue: languageRaw) ?? .system).locale)
         .commands {
             ViewerCommands()
         }
