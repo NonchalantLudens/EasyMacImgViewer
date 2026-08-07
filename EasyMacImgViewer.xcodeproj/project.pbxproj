@@ -1,0 +1,521 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA0000000000000000000301 /* EasyMacImgViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000101 /* EasyMacImgViewerApp.swift */; };
+		AA0000000000000000000302 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000102 /* AppDelegate.swift */; };
+		AA0000000000000000000303 /* ViewerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000103 /* ViewerModel.swift */; };
+		AA0000000000000000000304 /* FolderScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000104 /* FolderScanner.swift */; };
+		AA0000000000000000000305 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000105 /* ImageLoader.swift */; };
+		AA0000000000000000000306 /* LivePhotoPairer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000106 /* LivePhotoPairer.swift */; };
+		AA0000000000000000000307 /* WindowRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000107 /* WindowRootView.swift */; };
+		AA0000000000000000000308 /* ViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000108 /* ViewerView.swift */; };
+		AA0000000000000000000309 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000109 /* WelcomeView.swift */; };
+		AA000000000000000000030A /* ImageCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000010A /* ImageCanvasView.swift */; };
+		AA000000000000000000030B /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000010B /* ToolbarView.swift */; };
+		AA000000000000000000030C /* InfoOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000010C /* InfoOverlay.swift */; };
+		AA000000000000000000030D /* ErrorPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000010D /* ErrorPlaceholder.swift */; };
+		AA000000000000000000030E /* LivePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000010E /* LivePhotoController.swift */; };
+		AA000000000000000000030F /* AnimatedImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000010F /* AnimatedImageController.swift */; };
+		AA0000000000000000000316 /* OpenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000116 /* OpenRequest.swift */; };
+		AA0000000000000000000311 /* FolderScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000113 /* FolderScannerTests.swift */; };
+		AA0000000000000000000312 /* LivePhotoPairerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000114 /* LivePhotoPairerTests.swift */; };
+		AA0000000000000000000313 /* ViewerModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000115 /* ViewerModelTests.swift */; };
+		AA0000000000000000000317 /* ImageLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000117 /* ImageLoaderTests.swift */; };
+		AA0000000000000000000318 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000118 /* icon.icns */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AA0000000000000000000017 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA0000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA0000000000000000000004;
+			remoteInfo = EasyMacImgViewer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AA0000000000000000000101 /* EasyMacImgViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyMacImgViewerApp.swift; sourceTree = "<group>"; };
+		AA0000000000000000000102 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA0000000000000000000103 /* ViewerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerModel.swift; sourceTree = "<group>"; };
+		AA0000000000000000000104 /* FolderScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderScanner.swift; sourceTree = "<group>"; };
+		AA0000000000000000000105 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		AA0000000000000000000106 /* LivePhotoPairer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePhotoPairer.swift; sourceTree = "<group>"; };
+		AA0000000000000000000107 /* WindowRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowRootView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000108 /* ViewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000109 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		AA000000000000000000010A /* ImageCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCanvasView.swift; sourceTree = "<group>"; };
+		AA000000000000000000010B /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
+		AA000000000000000000010C /* InfoOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOverlay.swift; sourceTree = "<group>"; };
+		AA000000000000000000010D /* ErrorPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPlaceholder.swift; sourceTree = "<group>"; };
+		AA000000000000000000010E /* LivePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePhotoController.swift; sourceTree = "<group>"; };
+		AA000000000000000000010F /* AnimatedImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImageController.swift; sourceTree = "<group>"; };
+		AA0000000000000000000110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA0000000000000000000111 /* EasyMacImgViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyMacImgViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000112 /* EasyMacImgViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyMacImgViewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000113 /* FolderScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderScannerTests.swift; sourceTree = "<group>"; };
+		AA0000000000000000000114 /* LivePhotoPairerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePhotoPairerTests.swift; sourceTree = "<group>"; };
+		AA0000000000000000000115 /* ViewerModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerModelTests.swift; sourceTree = "<group>"; };
+		AA0000000000000000000116 /* OpenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenRequest.swift; sourceTree = "<group>"; };
+		AA0000000000000000000117 /* ImageLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderTests.swift; sourceTree = "<group>"; };
+		AA0000000000000000000118 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA0000000000000000000009 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA000000000000000000000C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA0000000000000000000201 = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000202 /* EasyMacImgViewer */,
+				AA0000000000000000000203 /* EasyMacImgViewerTests */,
+				AA0000000000000000000204 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000202 /* EasyMacImgViewer */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000205 /* App */,
+				AA0000000000000000000206 /* Models */,
+				AA0000000000000000000207 /* Services */,
+				AA0000000000000000000208 /* Views */,
+				AA0000000000000000000209 /* LivePhoto */,
+				AA000000000000000000020A /* Resources */,
+			);
+			path = EasyMacImgViewer;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000203 /* EasyMacImgViewerTests */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000113 /* FolderScannerTests.swift */,
+				AA0000000000000000000114 /* LivePhotoPairerTests.swift */,
+				AA0000000000000000000115 /* ViewerModelTests.swift */,
+				AA0000000000000000000117 /* ImageLoaderTests.swift */,
+			);
+			path = EasyMacImgViewerTests;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000204 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000111 /* EasyMacImgViewer.app */,
+				AA0000000000000000000112 /* EasyMacImgViewerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000205 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000101 /* EasyMacImgViewerApp.swift */,
+				AA0000000000000000000102 /* AppDelegate.swift */,
+				AA0000000000000000000116 /* OpenRequest.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000206 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000103 /* ViewerModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000207 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000104 /* FolderScanner.swift */,
+				AA0000000000000000000105 /* ImageLoader.swift */,
+				AA0000000000000000000106 /* LivePhotoPairer.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000208 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000107 /* WindowRootView.swift */,
+				AA0000000000000000000108 /* ViewerView.swift */,
+				AA0000000000000000000109 /* WelcomeView.swift */,
+				AA000000000000000000010A /* ImageCanvasView.swift */,
+				AA000000000000000000010B /* ToolbarView.swift */,
+				AA000000000000000000010C /* InfoOverlay.swift */,
+				AA000000000000000000010D /* ErrorPlaceholder.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000209 /* LivePhoto */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000010E /* LivePhotoController.swift */,
+				AA000000000000000000010F /* AnimatedImageController.swift */,
+			);
+			path = LivePhoto;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000020A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000110 /* Info.plist */,
+				AA0000000000000000000118 /* icon.icns */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA0000000000000000000004 /* EasyMacImgViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA000000000000000000000F /* Build configuration list for PBXNativeTarget "EasyMacImgViewer" */;
+			buildPhases = (
+				AA0000000000000000000008 /* Sources */,
+				AA0000000000000000000009 /* Frameworks */,
+				AA000000000000000000000A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EasyMacImgViewer;
+			productName = EasyMacImgViewer;
+			productReference = AA0000000000000000000111 /* EasyMacImgViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA0000000000000000000005 /* EasyMacImgViewerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0000000000000000000010 /* Build configuration list for PBXNativeTarget "EasyMacImgViewerTests" */;
+			buildPhases = (
+				AA000000000000000000000B /* Sources */,
+				AA000000000000000000000C /* Frameworks */,
+				AA000000000000000000000D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA0000000000000000000018 /* PBXTargetDependency */,
+			);
+			name = EasyMacImgViewerTests;
+			productName = EasyMacImgViewerTests;
+			productReference = AA0000000000000000000112 /* EasyMacImgViewerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA0000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					AA0000000000000000000005 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = AA0000000000000000000004;
+					};
+				};
+			};
+			buildConfigurationList = AA000000000000000000000E /* Build configuration list for PBXProject "EasyMacImgViewer" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA0000000000000000000201;
+			productRefGroup = AA0000000000000000000204 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA0000000000000000000004 /* EasyMacImgViewer */,
+				AA0000000000000000000005 /* EasyMacImgViewerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA000000000000000000000A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0000000000000000000318 /* icon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA000000000000000000000D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA0000000000000000000008 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0000000000000000000301 /* EasyMacImgViewerApp.swift in Sources */,
+				AA0000000000000000000302 /* AppDelegate.swift in Sources */,
+				AA0000000000000000000316 /* OpenRequest.swift in Sources */,
+				AA0000000000000000000303 /* ViewerModel.swift in Sources */,
+				AA0000000000000000000304 /* FolderScanner.swift in Sources */,
+				AA0000000000000000000305 /* ImageLoader.swift in Sources */,
+				AA0000000000000000000306 /* LivePhotoPairer.swift in Sources */,
+				AA0000000000000000000307 /* WindowRootView.swift in Sources */,
+				AA0000000000000000000308 /* ViewerView.swift in Sources */,
+				AA0000000000000000000309 /* WelcomeView.swift in Sources */,
+				AA000000000000000000030A /* ImageCanvasView.swift in Sources */,
+				AA000000000000000000030B /* ToolbarView.swift in Sources */,
+				AA000000000000000000030C /* InfoOverlay.swift in Sources */,
+				AA000000000000000000030D /* ErrorPlaceholder.swift in Sources */,
+				AA000000000000000000030E /* LivePhotoController.swift in Sources */,
+				AA000000000000000000030F /* AnimatedImageController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA000000000000000000000B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0000000000000000000311 /* FolderScannerTests.swift in Sources */,
+				AA0000000000000000000312 /* LivePhotoPairerTests.swift in Sources */,
+				AA0000000000000000000313 /* ViewerModelTests.swift in Sources */,
+				AA0000000000000000000317 /* ImageLoaderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA0000000000000000000018 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA0000000000000000000004 /* EasyMacImgViewer */;
+			targetProxy = AA0000000000000000000017 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AA0000000000000000000011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		AA0000000000000000000012 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		AA0000000000000000000013 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = NO;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = EasyMacImgViewer/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EasyMacImgViewer;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.easymac.imgviewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		AA0000000000000000000014 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = NO;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = EasyMacImgViewer/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EasyMacImgViewer;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.easymac.imgviewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		AA0000000000000000000015 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.easymac.imgviewer.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EasyMacImgViewer.app/Contents/MacOS/EasyMacImgViewer";
+			};
+			name = Debug;
+		};
+		AA0000000000000000000016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.easymac.imgviewer.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EasyMacImgViewer.app/Contents/MacOS/EasyMacImgViewer";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA000000000000000000000E /* Build configuration list for PBXProject "EasyMacImgViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000011 /* Debug */,
+				AA0000000000000000000012 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA000000000000000000000F /* Build configuration list for PBXNativeTarget "EasyMacImgViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000013 /* Debug */,
+				AA0000000000000000000014 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA0000000000000000000010 /* Build configuration list for PBXNativeTarget "EasyMacImgViewerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000015 /* Debug */,
+				AA0000000000000000000016 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA0000000000000000000001 /* Project object */;
+}
